@@ -121,7 +121,7 @@ module.exports.hotelsGetOne = (req, res) => {
 const _splitArray = (input) =>  {
     var output;
     if (input && input.length > 0) {
-      output = input.split(";");
+      output = input.split(",");
     } else {
       output = [];
     }
