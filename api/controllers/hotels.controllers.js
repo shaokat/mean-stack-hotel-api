@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Hotel = mongoose.model('Hotel');
 
 const runGeoQuery = (req, res) => {
-    console.log(parseFloat(req.query.lng), parseFloat(req.query.lat))
+    //console.log(parseFloat(req.query.lng), parseFloat(req.query.lat))
  Hotel
  .aggregate([
     { 
@@ -39,10 +39,8 @@ module.exports.hotelsGetAll = (req, res)=>{
     let maxCount = 10;
     
     if(req.query && req.query.lat && req.query.lng){
-        console.log("geo")
-        runGeoQuery(req, res)
-        console.log("geo")
-        return
+        runGeoQuery(req, res);
+        return;
 
     }
     

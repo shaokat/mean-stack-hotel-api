@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Hotel API",
-    "description": "Yet Another Node.js Blogg Application API",
+    "description": "This is robust  API for Hotel  ",
     "contact": {
       "name": "Shaokat Hossain",
       "email": "shaokatcse@gmail.com"
@@ -51,6 +51,7 @@
               "$ref": "#/definitions/hotel"
             }
           }
+          
         ],
         "produces": [
           "application/json"
@@ -67,6 +68,37 @@
       "get": {
         "tags": [
           "hotels"
+        ],
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "offset",
+            "type": "integer",
+            "description": "The number of items to skip before starting to collect the result set"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "type": "integer",
+            "description": "The numbers of items to return"
+            
+          },
+          {
+            "in": "query",
+            "name": "lng",
+            "type": "number",
+            "description": "Longitude value of your location "
+            
+          },
+
+          {
+            "in": "query",
+            "name": "lat",
+            "type": "number",
+            "description": "Latitude value of your loacation "
+            
+          }
+          
         ],
         "summary": "Get all hotels in system",
         "responses": {
@@ -162,9 +194,9 @@
         "description": "Create new room in system",
         "parameters": [
           {
-            "name": "hotel",
+            "name": "room",
             "in": "body",
-            "description": "hotel that we want to create",
+            "description": "room that we want to create",
             "schema": {
               "$ref": "#/roomDefinitions/rooms"
             }
@@ -292,9 +324,9 @@
         "description": "Create new review in system",
         "parameters": [
           {
-            "name": "hotel",
+            "name": "review",
             "in": "body",
-            "description": "hotel that we want to create",
+            "description": "review that we want to create",
             "schema": {
               "$ref": "#/reviewDefinitions/reviews"
             }
