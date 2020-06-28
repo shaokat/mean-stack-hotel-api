@@ -151,7 +151,7 @@
         }
       },
       "put": {
-        "summary": "Update hotel with give ID",
+        "summary": "Update hotel with given ID",
         "tags": [
           "hotels"
         ],
@@ -278,7 +278,7 @@
     },
 
     "put": {
-      "description": "Update room with given ID",
+      "summary": "Update room with given ID",
       "tags": [
         "rooms"
       ],
@@ -408,7 +408,7 @@
     },
 
     "put": {
-      "description": "Update review with given ID",
+      "summary": "Update review with given ID",
       "tags": [
         "reviews"
       ],
