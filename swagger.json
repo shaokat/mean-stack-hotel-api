@@ -9,7 +9,7 @@
       "email": "shaokatcse@gmail.com"
     }
   },
-  "host": "localhost:3000",
+  "host": "https://mean-hotel-api.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
