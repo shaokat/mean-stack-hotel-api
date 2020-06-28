@@ -3,6 +3,7 @@ let router = express.Router();
 
 const ctrlHotels = require('../controllers/hotels.controllers');
 const ctrlReviews = require('../controllers/reviews.controllers');
+const ctrlRooms = require('../controllers/rooms.controllers');
 
 router
   .route('/hotels')
@@ -27,5 +28,18 @@ router
   .get(ctrlReviews.reviewsGetOne)
   .put(ctrlReviews.reviewsUpdateOne)
   .delete(ctrlReviews.reviewsDeleteOne);
+
+//rooms routes
+
+router
+.route('/hotels/:hotelId/rooms')
+.get(ctrlRooms.roomsGetAll)
+.post(ctrlRooms.roomsAddOne);
+
+router
+  .route('/hotels/:hotelId/rooms/:roomId')
+  .get(ctrlRooms.roomsGetOne)
+  .put(ctrlRooms.roomsUpdateOne)
+  .delete(ctrlRooms.roomsDeleteOne);
 
 module.exports = router;

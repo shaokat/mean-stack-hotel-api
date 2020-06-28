@@ -1,0 +1,508 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Hotel API",
+    "description": "Yet Another Node.js Blogg Application API",
+    "contact": {
+      "name": "Shaokat Hossain",
+      "email": "shaokatcse@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "hotels",
+      "description": "main document in the system"
+    },
+    {
+      "name": "reviews",
+      "description": "subdocument in the system"
+    },
+    {
+      "name": "rooms",
+      "description": "subdocument in the system"
+    }
+  
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/hotels": {
+      "post": {
+        "tags": [
+          "hotels"
+        ],
+        "description": "Create new hotel in system",
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "hotel that we want to create",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New hotel is created",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "hotels"
+        ],
+        "summary": "Get all hotels in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/hotels"
+            }
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "hotels"
+        ],
+        "summary": "Get hotel with given ID",
+        "responses": {
+          "200": {
+            "description": "hotel is found",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        }
+      },
+      
+      "delete": {
+        "summary": "Delete hotel with given ID",
+        "tags": [
+          "hotels"
+        ],
+        "responses": {
+          "200": {
+            "description": "hotel is deleted",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update hotel with give ID",
+        "tags": [
+          "hotels"
+        ],
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "hotel with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "hotel is updated",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          }
+        }
+      }
+    },
+
+    "/hotels/{hotelId}/rooms": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that's room we want to find",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "rooms"
+        ],
+        
+        "description": "Create new room in system",
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "hotel that we want to create",
+            "schema": {
+              "$ref": "#/roomDefinitions/rooms"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New room is created",
+            "schema": {
+              "$ref": "#/roomDefinitions/rooms"
+            }
+          }
+        }
+      },
+    "get": {
+      "tags": [
+        "rooms"
+      ],
+     
+      "summary": "Get all rooms in system",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/roomDefinitions/rooms"
+          }
+        }
+        }
+      } 
+    },
+  "/hotels/{hotelId}/rooms/{roomId}": {
+    "parameters": [
+      {
+        "name": "hotelId",
+        "in": "path",
+        "required": true,
+        "description": "ID of hotel that we want to find",
+        "type": "string"
+      },
+      {
+        "name": "roomId",
+        "in": "path",
+        "required": true,
+        "description": "ID of room that we want to find",
+        "type": "string"
+      }
+    ],
+    "get": {
+      "tags": [
+        "rooms"
+      ],
+      "summary": "Get room with given ID",
+      "responses": {
+        "200": {
+          "description": "hotel is found",
+          "schema": {
+            "$ref": "#/definitions/hotel"
+          }
+        }
+      }
+    },
+
+    "delete": {
+      "summary": "Delete room  with given ID",
+      "tags": [
+        "rooms"
+      ],
+      "responses": {
+        "200": {
+          "description": "room is deleted",
+          "schema": {
+            "$ref": "#/roomDefinitions/rooms"
+          }
+        }
+      }
+    },
+
+    "put": {
+      "description": "Update room with given ID",
+      "tags": [
+        "rooms"
+      ],
+      "parameters": [
+        {
+          "name": "room",
+          "in": "body",
+          "description": "room with new values of properties",
+          "schema": {
+            "$ref": "#/roomDefinitions/rooms"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "room is updated",
+          "schema": {
+            "$ref": "#/roomDefinitions/rooms"
+          }
+        }
+      }
+    }
+  },
+
+    "/hotels/{hotelId}/reviews": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that's review we want to find",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "reviews"
+        ],
+        
+        "description": "Create new review in system",
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "hotel that we want to create",
+            "schema": {
+              "$ref": "#/reviewDefinitions/reviews"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New review is created",
+            "schema": {
+              "$ref": "#/reviewDefinitions/reviews"
+            }
+          }
+        }
+      },
+    "get": {
+      "tags": [
+        "reviews"
+      ],
+     
+      "summary": "Get all reviews in system",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/reviewDefinitions/reviews"
+          }
+        }
+        }
+      } 
+    },
+  "/hotels/{hotelId}/reviews/{reviewId}": {
+    "parameters": [
+      {
+        "name": "hotelId",
+        "in": "path",
+        "required": true,
+        "description": "ID of hotel that we want to find",
+        "type": "string"
+      },
+      {
+        "name": "reviewId",
+        "in": "path",
+        "required": true,
+        "description": "ID of review that we want to find",
+        "type": "string"
+      }
+    ],
+    "get": {
+      "tags": [
+        "reviews"
+      ],
+      "summary": "Get review with given ID",
+      "responses": {
+        "200": {
+          "description": "hotel is found",
+          "schema": {
+            "$ref": "#/definitions/hotel"
+          }
+        }
+      }
+    },
+
+    "delete": {
+      "summary": "Delete review  with given ID",
+      "tags": [
+        "reviews"
+      ],
+      "responses": {
+        "200": {
+          "description": "Review is deleted",
+          "schema": {
+            "$ref": "#/reviewDefinitions/reviews"
+          }
+        }
+      }
+    },
+
+    "put": {
+      "description": "Update review with given ID",
+      "tags": [
+        "reviews"
+      ],
+      "parameters": [
+        {
+          "name": "review",
+          "in": "body",
+          "description": "review with new values of properties",
+          "schema": {
+            "$ref": "#/reviewDefinitions/reviews"
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "Review is updated",
+          "schema": {
+            "$ref": "#/reviewDefinitions/reviews"
+          }
+        }
+      }
+    }
+  }
+},
+  
+  
+  "definitions": {
+    "hotel": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name" : {
+          "type" : "string"
+        },
+      "stars" : {
+          "type": "integer",
+          "min" : 0,
+          "max" : 5
+        
+      },
+      "services" :
+      {
+        "type": "array",
+        "items": {
+           "type": "string"
+          }
+    },
+      "description" :{
+        "type" : "string"
+    },
+    "photos" : {
+        "type": "array",
+        "items": {
+           "type": "string"
+          }
+    },
+      "currency" :{
+        "type" : "string"
+    },
+    "address" :{
+      "type" : "string"
+    },
+    "lng" :{
+      "type" : "number"
+  },
+  "lat" :{
+    "type" : "number"
+  }
+  }
+},
+  "hotels": {
+    "type": "array",
+      "$ref": "#/definitions/hotel"
+    }
+  
+  },
+
+  "reviewDefinitions" : {
+    "reviews": {
+      "required": [
+        "name",
+        "rating",
+        "review"
+      ],
+      "properties": {
+        "name" : {
+          "type" : "string"
+        },
+        "rating" : {
+          "type" : "number",
+          "min" : 0,
+          "max": 5
+        },
+      "review" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+
+  "roomDefinitions" : {
+    "rooms" : {
+      "properties":{
+        "type" : {
+          "type" : "string"
+        },
+        "number" :{
+          "type" : "number"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "photos" : {
+          "type": "array",
+          "items": {
+            "type": "string"
+            }
+        },
+        "price":{
+          "type" : "number"
+        }
+      }
+    }
+  }
+}

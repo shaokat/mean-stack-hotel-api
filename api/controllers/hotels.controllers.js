@@ -118,15 +118,15 @@ module.exports.hotelsGetOne = (req, res) => {
             
         })
 }
-const _splitArray = (input) =>  {
-    var output;
-    if (input && input.length > 0) {
-      output = input.split(",");
-    } else {
-      output = [];
-    }
-    return output;
-  };
+// const _splitArray = (input) =>  {
+//     var output;
+//     if (input && input.length > 0) {
+//       output = input.split(",");
+//     } else {
+//       output = [];
+//     }
+//     return output;
+//   };
 
 module.exports.hotelsAddOne = (req, res) =>{
     console.log(req.body)
@@ -135,8 +135,8 @@ module.exports.hotelsAddOne = (req, res) =>{
             name : req.body.name,
             description : req.body.description,
             stars : parseInt(req.body.stars,10),
-            services : _splitArray(req.body.services),
-            photos : _splitArray(req.body.photos),
+            services : req.body.services,
+            photos : req.body.photos,
             currency : req.body.currency,
             location : {
               address : req.body.address,
@@ -177,7 +177,7 @@ module.exports.hotelsUpdateOne = (req, res) => {
         console.log("HotelId not found in database", hotelId);
         res
           .status(404)
-          .lson({
+          .json({
             "message" : "Hotel ID not found " + hotelId
           });
           return;
@@ -186,8 +186,8 @@ module.exports.hotelsUpdateOne = (req, res) => {
       hotel.name = req.body.name;
       hotel.description = req.body.description;
       hotel.stars = parseInt(req.body.stars,10);
-      hotel.services = _splitArray(req.body.services);
-      hotel.photos = _splitArray(req.body.photos);
+      hotel.services = req.body.services;
+      hotel.photos = req.body.photos;
       hotel.currency = req.body.currency;
       hotel.location = {
         address : req.body.address,

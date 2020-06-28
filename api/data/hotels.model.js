@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Double } = require('mongodb');
 
 const reviewSchema = new mongoose.Schema({
     name: {
@@ -25,6 +26,8 @@ const roomSchema = new mongoose.Schema({
     type : String,
     number : Number,
     description : String,
+    photos: [String],
+    price: Number
 
 });
 
@@ -42,7 +45,7 @@ var hotelSchema = new mongoose.Schema({
     services : [String],
     description : String,
     photos : [String],
-    curency : String,
+    currency : String,
     reviews : [reviewSchema],
     rooms : [roomSchema],
     location : {
