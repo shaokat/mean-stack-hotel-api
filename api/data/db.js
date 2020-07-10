@@ -22,3 +22,4 @@ mongoose.connection.on('error',() => {
 // MODELS
 
 require('./hotels.model');
+require('./user.model');

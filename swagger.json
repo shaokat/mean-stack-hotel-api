@@ -17,17 +17,25 @@
       "description": "main document in the system"
     },
     {
-      "name": "reviews",
-      "description": "subdocument in the system"
-    },
-    {
       "name": "rooms",
       "description": "subdocument in the system"
+    },
+
+    {
+      "name": "users",
+      "description": "customers sign(up/in) in the system"
+    },
+
+    {
+      "name": "reviews",
+      "description": "subdocument in the system"
     }
+
+    
   
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -305,7 +313,66 @@
       }
     }
   },
-
+  "/users/register": {
+    "post": {
+      "tags": [
+        "users"
+      ],
+      "description": "Create new hotel in system",
+      "parameters": [
+        {
+          "name": "user",
+          "in": "body",
+          "description": "user that we want to create",
+          "schema": {
+            "$ref": "#/userInformations/users"
+          }
+        }
+        
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "user is created",
+          "schema": {
+            "$ref": "#/userInformations/users"
+          }
+        }
+      }
+    }
+  },
+  "/users/login":{
+    "post": {
+      "tags": [
+        "users"
+      ],
+      "description": "login into system for token",
+      "parameters": [
+        {
+          "name": "user",
+          "in": "body",
+          "description": "user that we want to login",
+          "schema": {
+            "$ref": "#/userInformations/login"
+          }
+        }
+        
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "user is login",
+          "schema": {
+            "$ref":"#/userInformations/loginRes"
+          }
+        }
+      }
+    }
+  },
     "/hotels/{hotelId}/reviews": {
       "parameters": [
         {
@@ -313,6 +380,13 @@
           "in": "path",
           "required": true,
           "description": "ID of hotel that's review we want to find",
+          "type": "string"
+        },
+        {
+          "name": "authorization",
+          "in": "header",
+          "required": true,
+          "description": "jwt token for login user",
           "type": "string"
         }
       ],
@@ -472,21 +546,21 @@
       "currency" :{
         "type" : "string"
     },
-    "address" :{
-      "type" : "string"
-    },
-    "lng" :{
-      "type" : "number"
-  },
-  "lat" :{
-    "type" : "number"
-  }
-  }
-},
-  "hotels": {
-    "type": "array",
-      "$ref": "#/definitions/hotel"
+      "address" :{
+        "type" : "string"
+      },
+      "lng" :{
+        "type" : "number"
+      },
+      "lat" :{
+        "type" : "number"
+      }
     }
+  },
+    "hotels": {
+      "type": "array",
+        "$ref": "#/definitions/hotel"
+      }
   
   },
 
@@ -536,5 +610,52 @@
         }
       }
     }
+  },
+
+  "userInformations" : {
+    "users" : {
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties" : {
+     
+        "username": {
+          "type" : "string"
+        },
+        "name":{
+            "type": "string"
+        },
+        "password": {
+            "type": "string"
+        }
+      }
+    },
+    "login" : {
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties":{
+          "username": {
+            "type" : "string"
+          },
+          "password": {
+              "type": "string"
+          }
+        }
+    
+      },
+      "loginRes": {
+        "properties":{
+          "success": {
+            "type" : "boolean"
+          },
+          "token": {
+              "type": "string"
+          }
+        }
+      }
   }
+  
 }
